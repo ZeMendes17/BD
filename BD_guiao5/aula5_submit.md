@@ -124,37 +124,44 @@ PRODUTO_QUANTIDADE = γcodProd; quantidade←sum(unidades) item
 ### *a)*
 
 ```
-... Write here your answer ...
+temp=ρ utente←numUtente (paciente)
+πnome,utente (σnumUtente=null (temp ⟕utente=numUtente prescricao))
 ```
 
 ### *b)* 
 
 ```
-... Write here your answer ...
+γ especialidade;count(especialidade)->QntPrescricoes (prescricao ⨝ numMedico=numSNS (medico))
 ```
 
 
 ### *c)* 
 
 ```
-... Write here your answer ...
+γ nome; count(nome)->prescricoesProc (farmacia ⨝ nome=farmacia (prescricao))
 ```
 
 
 ### *d)* 
 
 ```
-... Write here your answer ...
+temp=ρ numpresc←numPresc (prescricao)
+π nome (σ numRegFarm=906 (farmaco)) - 
+(π nomeFarmaco (σ numRegFarm=906 (temp ⨝ numpresc=numPresc (presc_farmaco))))
 ```
 
 ### *e)* 
 
 ```
-... Write here your answer ...
+temp = ρnumpres←numPresc (prescricao)
+γ farmacia, nome; count(numRegFarm)->farmacosVend (farmaceutica ⨝ numReg=numRegFarm (
+		presc_farmaco ⨝ numPresc=numpres (σ farmacia!=null (temp))))
 ```
 
 ### *f)* 
 
 ```
-... Write here your answer ...
+σ NumMedPrescreveu>1 (
+γ paciente.numUtente, paciente.nome; count(numSNS)->NumMedPrescreveu (
+medico ⨝ numSNS=numMedico (prescricao ⨝ prescricao.numUtente=paciente.numUtente (paciente))))
 ```
